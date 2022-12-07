@@ -1,9 +1,9 @@
 from binaryninja import *
 from binaryninjaui import DockHandler, DockContextHandler, UIActionHandler, getMonospaceFont
-from PySide2 import QtCore
-from PySide2.QtCore import Qt, QAbstractTableModel
-from PySide2.QtWidgets import *
-from PySide2.QtGui import (QFont, QFontMetricsF, QTextCursor, QBrush)
+from PySide6 import QtCore
+from PySide6.QtCore import Qt, QAbstractTableModel
+from PySide6.QtWidgets import *
+from PySide6.QtGui import (QFont, QFontMetricsF, QTextCursor, QBrush, QAction)
 
 colors = {"black":   HighlightStandardColor.BlackHighlightColor,
           "cyan":    HighlightStandardColor.CyanHighlightColor,
@@ -228,7 +228,8 @@ class Importer(BackgroundTaskThread):
 def import_data(bv):
     file_name = interaction.get_open_filename_input("Choose JMPscare analysis output file.")
     i = Importer(bv, file_name)
-    i.run()
+    if i.file is not None:
+        i.run()
     
 
 def openDockWidget():
